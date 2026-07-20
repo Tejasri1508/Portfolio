@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tejasri Penubothu — Software Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --paper:      #f4f0e6;
+    --paper-dark: #eae3d3;
+    --card:       #fbf9f3;
+    --ink:        #1e2a22;
+    --ink-soft:   #4a5c50;
+    --ink-faint:  #8d9a8f;
+    --sage:       #3d6b52;
+    --sage-light: #6f9c80;
+    --coral:      #c1543f;
+    --rule:       #d3c9b0;
+    --rule-dark:  #b8ab88;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(30,42,34,0.045) 1px, transparent 0);
+    background-size:22px 22px;
+  }
+  ::selection{background:var(--sage-light);color:var(--card);}
+  ::-webkit-scrollbar{width:5px;}
+  ::-webkit-scrollbar-track{background:var(--paper);}
+  ::-webkit-scrollbar-thumb{background:var(--rule-dark);border-radius:3px;}
+
+  a{color:inherit;}
+
+  /* ============ NAV ============ */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 2.6rem;
+    background:rgba(244,240,230,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-mark{
+    font-family:var(--font-mono);
+    font-size:12px;letter-spacing:0.06em;
+    color:var(--ink-soft);
+    display:flex;align-items:center;gap:8px;
+  }
+  .nav-mark b{color:var(--sage);font-weight:600;}
+  .nav-links{display:flex;gap:1.9rem;}
+  .nav-links a{
+    font-family:var(--font-mono);
+    font-size:12px;letter-spacing:0.04em;
+    text-decoration:none;color:var(--ink-soft);
+    transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--coral);}
+  @media(max-width:760px){.nav-links{display:none;}}
+
+  section{padding:6.5rem 0;}
+  .container{max-width:960px;margin:0 auto;padding:0 2.6rem;}
+
+  /* ============ HERO — the drawer pulled open ============ */
+  #hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:5rem;
+    position:relative;
+  }
+  .drawer-rail{
+    position:absolute;top:0;left:0;right:0;height:5rem;
+    display:flex;align-items:flex-end;
+    overflow:hidden;
+  }
+  .catalog-frame{
+    position:relative;
+    border:1px solid var(--rule-dark);
+    background:var(--card);
+    box-shadow:0 30px 60px -30px rgba(30,42,34,0.25), 0 2px 0 var(--rule-dark);
+    padding:3.4rem 3.6rem 3rem;
+    max-width:760px;
+  }
+  .catalog-frame::before{
+    content:'';
+    position:absolute;top:14px;left:50%;
+    transform:translateX(-50%);
+    width:56px;height:14px;
+    border:1px solid var(--rule-dark);
+    border-bottom:none;
+    border-radius:3px 3px 0 0;
+    background:var(--paper-dark);
+  }
+  .card-tab{
+    position:absolute;top:-13px;left:2.4rem;
+    background:var(--sage);
+    color:var(--card);
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    padding:5px 14px;
+  }
+  .card-index{
+    font-family:var(--font-mono);
+    font-size:11px;color:var(--ink-faint);
+    letter-spacing:0.08em;
+    margin-bottom:1.6rem;
+    display:flex;gap:1.4rem;
+  }
+  .hero-name{
+    font-family:var(--font-display);
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(2.6rem,6vw,4.4rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .hero-name em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--sage);
+  }
+  .hero-role{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    letter-spacing:0.03em;
+    margin-top:1.1rem;
+    padding-top:1.1rem;
+    border-top:1px dashed var(--rule-dark);
+  }
+  .hero-role .dot{color:var(--coral);margin:0 8px;}
+
+  .hero-desc{
+    margin-top:1.6rem;
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:520px;
+  }
+
+  .hero-foot{
+    margin-top:2.2rem;
+    display:flex;flex-wrap:wrap;gap:0.8rem;
+    align-items:center;
+  }
+  .stamp-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-mono);
+    font-size:12.5px;letter-spacing:0.03em;
+    padding:11px 22px;
+    text-decoration:none;
+    transition:all .2s;
+    border:1px solid var(--ink);
+  }
+  .stamp-btn:hover{background:var(--sage);border-color:var(--sage);transform:translateY(-2px);}
+  .stamp-btn.ghost{
+    background:transparent;color:var(--ink);
+  }
+  .stamp-btn.ghost:hover{background:var(--ink);color:var(--paper);}
+
+  .contact-row{
+    margin-top:1.6rem;
+    display:flex;flex-wrap:wrap;gap:1.3rem;
+    font-family:var(--font-mono);
+    font-size:12px;color:var(--ink-faint);
+  }
+  .contact-row a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid var(--rule-dark);}
+  .contact-row a:hover{color:var(--coral);border-color:var(--coral);}
+
+  /* ============ SECTION HEADERS ============ */
+  .sec-eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:0.7rem;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-eyebrow .n{color:var(--ink-faint);}
+  .sec-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.7rem,3vw,2.3rem);
+    letter-spacing:-0.01em;
+    margin-bottom:2.6rem;
+  }
+
+  /* ============ ABOUT ============ */
+  #about{background:var(--paper-dark);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:4rem;align-items:start;}
+  .about-text p{color:var(--ink-soft);margin-bottom:1rem;font-size:15px;}
+  .about-text strong{color:var(--ink);font-weight:600;}
+  .ledger{
+    background:var(--card);
+    border:1px solid var(--rule-dark);
+  }
+  .ledger-row{
+    display:flex;justify-content:space-between;
+    padding:0.95rem 1.3rem;
+    border-bottom:1px dashed var(--rule);
+    font-family:var(--font-mono);
+    font-size:12.5px;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row span:first-child{color:var(--ink-faint);}
+  .ledger-row span:last-child{color:var(--ink);font-weight:600;}
+
+  /* ============ SKILLS — call slip ============ */
+  #skills{background:var(--paper);}
+  .slip{
+    border:1px solid var(--rule-dark);
+    background:var(--card);
+  }
+  .slip-head{
+    display:grid;grid-template-columns:1fr 1fr 1fr;
+    font-family:var(--font-mono);
+    font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--paper);
+    background:var(--ink);
+  }
+  .slip-head div{padding:10px 16px;border-right:1px solid rgba(244,240,230,0.15);}
+  .slip-head div:last-child{border-right:none;}
+  .slip-body{display:grid;grid-template-columns:1fr 1fr 1fr;}
+  .slip-cell{
+    padding:1.3rem 1.5rem;
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .slip-body .slip-cell:nth-child(3n){border-right:none;}
+  .slip-cat{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;
+    color:var(--sage);text-transform:uppercase;margin-bottom:0.7rem;
+  }
+  .slip-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .slip-tag{
+    font-size:12.5px;color:var(--ink-soft);
+    padding:3px 0;
+  }
+  .slip-tag:not(:last-child)::after{content:'·';margin-left:8px;color:var(--rule-dark);}
+  @media(max-width:700px){
+    .slip-head,.slip-body{grid-template-columns:1fr;}
+    .slip-head div{border-right:none;border-bottom:1px solid rgba(244,240,230,0.15);}
+    .slip-body .slip-cell{border-right:none;}
+  }
+
+  /* ============ PROJECTS — index cards ============ */
+  #projects{background:var(--paper-dark);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .card-catalog{display:grid;gap:1.6rem;}
+  .index-card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--rule-dark);
+    padding:2.1rem 2.3rem 1.9rem;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .index-card::before{
+    content:'';
+    position:absolute;top:0;left:34px;
+    width:1px;height:100%;
+    background:repeating-linear-gradient(to bottom, var(--rule) 0 6px, transparent 6px 12px);
+    opacity:0.6;
+  }
+  .index-card:hover{
+    transform:translateY(-4px) rotate(-0.2deg);
+    box-shadow:0 22px 40px -24px rgba(30,42,34,0.35);
+  }
+  .idx-top{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    margin-bottom:0.9rem;padding-left:1.6rem;
+  }
+  .idx-label{
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+  .idx-role{
+    font-family:var(--font-mono);font-size:10.5px;
+    color:var(--coral);letter-spacing:0.05em;
+    border:1px solid var(--coral);
+    padding:3px 10px;
+    white-space:nowrap;
+  }
+  .idx-title{
+    font-family:var(--font-display);font-weight:600;
+    font-size:1.3rem;margin-bottom:0.35rem;padding-left:1.6rem;
+  }
+  .idx-tools{
+    font-family:var(--font-mono);font-size:11.5px;color:var(--sage);
+    margin-bottom:1rem;padding-left:1.6rem;
+  }
+  .idx-desc{padding-left:1.6rem;}
+  .idx-desc li{
+    list-style:none;position:relative;padding-left:1rem;
+    font-size:14px;color:var(--ink-soft);margin-bottom:0.4rem;
+  }
+  .idx-desc li::before{
+    content:'—';position:absolute;left:0;color:var(--ink-faint);
+  }
+
+  /* ============ EDUCATION ============ */
+  #education{background:var(--paper);}
+  .edu-shelf{display:grid;gap:1rem;}
+  .edu-row{
+    display:flex;align-items:center;gap:1.6rem;
+    padding:1.3rem 1.6rem;
+    background:var(--card);
+    border:1px solid var(--rule-dark);
+    border-left:4px solid var(--sage);
+  }
+  .edu-yr{
+    font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);
+    min-width:88px;
+  }
+  .edu-body{flex:1;}
+  .edu-degree{font-family:var(--font-display);font-weight:600;font-size:1.02rem;}
+  .edu-inst{font-size:13px;color:var(--ink-soft);margin-top:2px;}
+  .edu-score{
+    font-family:var(--font-mono);font-weight:600;font-size:1.1rem;
+    color:var(--sage);white-space:nowrap;
+  }
+  @media(max-width:650px){
+    .edu-row{flex-wrap:wrap;}
+    .edu-score{margin-left:auto;}
+  }
+
+  /* ============ CERTS + ACHIEVEMENTS ============ */
+  #certs{background:var(--paper-dark);border-top:1px solid var(--rule);}
+  .stub-row{display:flex;flex-wrap:wrap;gap:0.7rem;margin-bottom:3rem;}
+  .stub{
+    font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);
+    background:var(--card);border:1px solid var(--rule-dark);
+    padding:8px 15px;
+    position:relative;
+  }
+  .stub::before{content:'✂ ';color:var(--rule-dark);}
+
+  .achieve-card{
+    background:var(--card);
+    border:1px solid var(--coral);
+    padding:1.8rem 2rem;
+    position:relative;
+  }
+  .achieve-card::before{
+    content:'AWARD';
+    position:absolute;top:-10px;left:1.7rem;
+    background:var(--coral);color:var(--card);
+    font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+    padding:4px 12px;
+  }
+  .achieve-title{font-family:var(--font-display);font-weight:600;font-size:1.1rem;margin-bottom:0.4rem;}
+  .achieve-desc{font-size:14px;color:var(--ink-soft);}
+
+  /* ============ CONTACT ============ */
+  #contact{background:var(--paper);text-align:center;}
+  #contact .container{max-width:640px;}
+  #contact p{color:var(--ink-soft);margin:1.2rem 0 2.2rem;font-size:15px;}
+
+  footer{
+    padding:2.4rem 2.6rem;
+    text-align:center;
+    border-top:1px solid var(--rule);
+    font-family:var(--font-mono);
+    font-size:11.5px;color:var(--ink-faint);
+  }
+  footer b{color:var(--sage);}
+
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(prefers-reduced-motion:reduce){
+    .fade-in{opacity:1;transform:none;transition:none;}
+    .index-card:hover{transform:none;}
+  }
+
+  @media(max-width:750px){
+    .about-grid{grid-template-columns:1fr;gap:2.4rem;}
+    .catalog-frame{padding:2.4rem 1.7rem 2.2rem;}
+  }
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--sage);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark"><b>T.</b> PENUBOTHU — CATALOG NO. 2026</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#certs">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="catalog-frame">
+      <div class="card-tab">Developer Record</div>
+      <div class="card-index">
+        <span>NO. 2026 — CSE</span>
+        <span>AI &amp; ML SPECIALIZATION</span>
+      </div>
+      <h1 class="hero-name">Tejasri<br><em>Penubothu</em></h1>
+      <p class="hero-role">Full-Stack Development <span class="dot">·</span> Machine Learning <span class="dot">·</span> Applied AI</p>
+      <p class="hero-desc">B.Tech graduate building things that search, recommend, and predict — from a molecule-screening deep learning model to a nutrition dashboard people actually finished building.</p>
+      <div class="hero-foot">
+        <a href="mailto:tejasripenubothu46@gmail.com" class="stamp-btn">Get in touch</a>
+        <a href="#projects" class="stamp-btn ghost">See the work</a>
+      </div>
+      <div class="contact-row">
+        <a href="mailto:tejasripenubothu46@gmail.com">tejasripenubothu46@gmail.com</a>
+        <a href="tel:+917993138449">+91 79931 38449</a>
+        <a href="#">Guntur, Andhra Pradesh</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <div class="sec-eyebrow"><span class="n">01</span> About</div>
+        <h2 class="sec-title">A graduate who ships<br>rather than just studies</h2>
+        <p>Tejasri is a <strong>Computer Science &amp; Engineering (AI &amp; ML)</strong> graduate from Vignan's Nirula Institute of Technology and Science for Women, finishing in <strong>May 2026</strong>.</p>
+        <p>Her project record spans the full stack of applied CS: a hybrid quantum-classical model for drug discovery, a recipe recommendation engine, and a nutrition tracker that took first place at her college's Project Expo.</p>
+        <p>She's looking for an entry-level developer role where she can keep building — and keep learning fast on the job.</p>
+      </div>
+      <div class="ledger fade-in">
+        <div class="ledger-row"><span>Degree</span><span>B.Tech, AI &amp; ML</span></div>
+        <div class="ledger-row"><span>CGPA</span><span>8.01 / 10</span></div>
+        <div class="ledger-row"><span>Graduating</span><span>05 / 2026</span></div>
+        <div class="ledger-row"><span>Projects</span><span>3 shipped</span></div>
+        <div class="ledger-row"><span>Certificates</span><span>4 tracks</span></div>
+        <div class="ledger-row"><span>Awards</span><span>Expo, 1st place</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="fade-in">
+      <div class="sec-eyebrow"><span class="n">02</span> Skills</div>
+      <h2 class="sec-title">What she works with</h2>
+    </div>
+    <div class="slip fade-in">
+      <div class="slip-head">
+        <div>Languages</div><div>Frontend</div><div>Backend &amp; Data</div>
+      </div>
+      <div class="slip-body">
+        <div class="slip-cell">
+          <div class="slip-cat">Core</div>
+          <div class="slip-tags">
+            <span class="slip-tag">Python</span><span class="slip-tag">Java</span>
+          </div>
+        </div>
+        <div class="slip-cell">
+          <div class="slip-cat">Web</div>
+          <div class="slip-tags">
+            <span class="slip-tag">HTML5</span><span class="slip-tag">CSS3</span><span class="slip-tag">JavaScript</span><span class="slip-tag">React.js</span><span class="slip-tag">Tailwind CSS</span><span class="slip-tag">Bootstrap</span>
+          </div>
+        </div>
+        <div class="slip-cell">
+          <div class="slip-cat">Server</div>
+          <div class="slip-tags">
+            <span class="slip-tag">Node.js</span><span class="slip-tag">Express.js</span><span class="slip-tag">RESTful APIs</span><span class="slip-tag">MongoDB</span>
+          </div>
+        </div>
+        <div class="slip-cell">
+          <div class="slip-cat">ML / Data</div>
+          <div class="slip-tags">
+            <span class="slip-tag">TensorFlow</span><span class="slip-tag">Scikit-learn</span><span class="slip-tag">Pandas</span><span class="slip-tag">NumPy</span>
+          </div>
+        </div>
+        <div class="slip-cell">
+          <div class="slip-cat">Tools</div>
+          <div class="slip-tags">
+            <span class="slip-tag">VS Code</span><span class="slip-tag">Eclipse</span><span class="slip-tag">Git</span><span class="slip-tag">Excel</span>
+          </div>
+        </div>
+        <div class="slip-cell">
+          <div class="slip-cat">Working style</div>
+          <div class="slip-tags">
+            <span class="slip-tag">Fast learner</span><span class="slip-tag">Problem-solver</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="fade-in">
+      <div class="sec-eyebrow"><span class="n">03</span> Projects</div>
+      <h2 class="sec-title">Three records worth pulling</h2>
+    </div>
+    <div class="card-catalog">
+
+      <div class="index-card fade-in">
+        <div class="idx-top">
+          <span class="idx-label">Record — Drug Discovery</span>
+          <span class="idx-role">Backend Developer</span>
+        </div>
+        <div class="idx-title">Drug Discovery Acceleration using Quantum Deep Learning</div>
+        <div class="idx-tools">Python · TensorFlow · Qiskit · NumPy · Pandas</div>
+        <ul class="idx-desc">
+          <li>Built a hybrid quantum-classical deep learning model for molecular property prediction in drug discovery.</li>
+          <li>Processed chemical datasets to accelerate drug screening and flag candidate compounds.</li>
+        </ul>
+      </div>
+
+      <div class="index-card fade-in">
+        <div class="idx-top">
+          <span class="idx-label">Record — Nutrition Tracker</span>
+          <span class="idx-role">Front-End Developer</span>
+        </div>
+        <div class="idx-title">Nutrition Tracker App <span style="font-family:var(--font-mono);font-size:11px;color:var(--coral);">— 1st Place, Project Expo '25</span></div>
+        <div class="idx-tools">HTML · CSS · JavaScript · React.js</div>
+        <ul class="idx-desc">
+          <li>Built a web app to track daily calorie intake and nutritional information.</li>
+          <li>Integrated food search and recipe recommendations via external APIs.</li>
+          <li>Shipped a daily-tracking dashboard for monitoring nutrition goals.</li>
+        </ul>
+      </div>
+
+      <div class="index-card fade-in">
+        <div class="idx-top">
+          <span class="idx-label">Record — Recipe Engine</span>
+          <span class="idx-role">Developer</span>
+        </div>
+        <div class="idx-title">Recipe Recommendation System</div>
+        <div class="idx-tools">Python · HTML · CSS · JavaScript</div>
+        <ul class="idx-desc">
+          <li>Built a system to suggest recipes based on user preferences.</li>
+          <li>Implemented search and filtering for easy recipe navigation.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="fade-in">
+      <div class="sec-eyebrow"><span class="n">04</span> Education</div>
+      <h2 class="sec-title">Academic record</h2>
+    </div>
+    <div class="edu-shelf">
+      <div class="edu-row fade-in">
+        <div class="edu-yr">2022 – 2026</div>
+        <div class="edu-body">
+          <div class="edu-degree">B.Tech — CSE (AI &amp; ML)</div>
+          <div class="edu-inst">Vignan's Nirula Institute of Technology and Science for Women, Guntur</div>
+        </div>
+        <div class="edu-score">8.01 CGPA</div>
+      </div>
+      <div class="edu-row fade-in">
+        <div class="edu-yr">— 2022</div>
+        <div class="edu-body">
+          <div class="edu-degree">Intermediate</div>
+          <div class="edu-inst">Narayana Junior College</div>
+        </div>
+        <div class="edu-score">81%</div>
+      </div>
+      <div class="edu-row fade-in">
+        <div class="edu-yr">— 2020</div>
+        <div class="edu-body">
+          <div class="edu-degree">Secondary School Education</div>
+          <div class="edu-inst">Pace NR Olympiad</div>
+        </div>
+        <div class="edu-score">95%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS + ACHIEVEMENTS -->
+<section id="certs">
+  <div class="container">
+    <div class="fade-in">
+      <div class="sec-eyebrow"><span class="n">05</span> Certificates</div>
+      <h2 class="sec-title">Credentials on file</h2>
+    </div>
+    <div class="stub-row fade-in">
+      <span class="stub">Wipro — Java Full Stack</span>
+      <span class="stub">APSSDC — AI &amp; ML</span>
+      <span class="stub">Purple Technologies — Java Full Stack, Cloud Computing, AI &amp; ML</span>
+      <span class="stub">Infosys Springboard — Python, JavaScript, Java, CSS3, TypeScript, Angular</span>
+    </div>
+    <div class="achieve-card fade-in">
+      <div class="achieve-title">First Place, College Project Expo (2025)</div>
+      <div class="achieve-desc">Presented the Nutrition Tracker project and won top honors for innovation, functionality, and overall presentation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-in">
+      <div class="sec-eyebrow" style="justify-content:center;">Contact</div>
+      <h2 class="sec-title">Let's talk</h2>
+      <p>Open to entry-level developer roles in software, ML, or full-stack — reach out any time.</p>
+      <a href="mailto:tejasripenubothu46@gmail.com" class="stamp-btn" style="font-size:14px;padding:13px 28px;">tejasripenubothu46@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Catalog record maintained by <b>Tejasri Penubothu</b> · 2026
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+  });
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
